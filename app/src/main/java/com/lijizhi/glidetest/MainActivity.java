@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 public class MainActivity extends AppCompatActivity {
     private ImageView imageView;
@@ -15,11 +16,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         imageView=(ImageView)findViewById(R.id.image_view);
+
     }
     public void loadImage(View view){
-        String url="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3698862712,3088651975&fm=27&gp=0.jpg";
+        String url="http://p1.pstatp.com/large/166200019850062839d3";
+        Glide.with(this)
+                .load(url)
+                .asGif()
+                .placeholder(R.drawable.loading)
+                .error(R.drawable.error)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .into(imageView);
 
 
-        Glide.with(this).load(url).into(imageView);
     }
+
 }
